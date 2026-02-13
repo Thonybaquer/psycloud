@@ -4,22 +4,22 @@ import { promises as fs } from "fs";
 
 export const runtime = "nodejs";
 
-// Serves uploaded files from a writable directory (works in packaged desktop apps).
+// /api/archivos/[nombre]
 export async function GET(
   _req: Request,
-  { params }: { params: { nombre: string } }
+  context: { params: { nombre: string } }
 ) {
   try {
     const uploadsDir = process.env.UPLOADS_DIR
       ? path.resolve(process.env.UPLOADS_DIR)
       : path.join(process.cwd(), "public", "uploads");
 
-    const filePath = path.join(uploadsDir, params.nombre);
+    const nombre = context.params.nombre; // <- coincide con [nombre]
+    const filePath = path.join(uploadsDir, nombre);
 
     const data = await fs.readFile(filePath);
 
-    // Basic content-type sniffing by extension (enough for images + common docs)
-    const ext = path.extname(params.nombre).toLowerCase();
+    const ext = path.extname(nombre).toLowerCase();
     const type =
       ext === ".png"
         ? "image/png"
