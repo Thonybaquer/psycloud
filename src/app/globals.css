@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  FullCalendar v6+ injects its own CSS at runtime.
+  Importing CSS from @fullcalendar/* can fail in some bundlers due to package "exports".
+*/
+
+html, body {
+  height: 100%;
+  overflow: auto; /* asegura scroll vertical/horizontal cuando el contenido lo requiera */
+}
+
+/* Scrollbars (horizontal + vertical) */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
+}
+
+/* WebKit */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.7);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.85);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark * {
+  scrollbar-color: rgba(71, 85, 105, 0.9) transparent;
+}
+.dark *::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.75);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.dark *::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 65, 85, 0.9);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+body {
+  background: #F7F9FC;
+  color: #111827;
+}
+
+:root{
+  --pc-primary:#2563EB;
+  --pc-bg:#F7F9FC;
+  --pc-text:#111827;
+  --pc-muted:#6B7280;
+  --pc-error:#DC2626;
+  --pc-warn:#F59E0B;
+  --pc-success:#16A34A;
+  --pc-card-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+/* Base card look (use className="pc-card") */
+.pc-card{
+  background: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--pc-card-shadow);
+  padding: 16px;
+}
+
+.dark body{ color: rgb(241 245 249); }
+.dark body{ background: rgb(2 6 23); }
+.dark .pc-card{
+  background: rgb(15 23 42); /* slate-900 */
+}
+
+/* FullCalendar visual cleanup */
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid td,
+.fc .fc-scrollgrid th{
+  border-color: #E5E7EB !important;
+}
+
+.fc .fc-day-today{
+  background: #E0F2FE !important;
+}
+
+.dark .fc .fc-day-today{
+  background: rgba(14, 116, 144, 0.18) !important;
+}
+
+.fc .fc-event,
+.fc .fc-v-event,
+.fc .fc-h-event{
+  background: var(--pc-primary) !important;
+  border-color: var(--pc-primary) !important;
+  color: #FFFFFF !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+}
+
+.fc .fc-event .fc-event-main{ color: #FFFFFF !important; }
+
+
+/* Better editor/timeline typography (Word-like spacing) */
+.prose ul { padding-left: 1.25rem; }
+.prose ol { padding-left: 1.25rem; }
+.prose li { margin-top: 0.15rem; margin-bottom: 0.15rem; }
+.prose p { margin-top: 0.35rem; margin-bottom: 0.35rem; }
+.prose h1, .prose h2, .prose h3 { margin-top: 0.9rem; margin-bottom: 0.35rem; }
+
+/* Dark mode for prose */
+.dark .prose { color: rgb(226 232 240); }
+.dark .prose a { color: rgb(96 165 250); }
+.dark .prose strong { color: rgb(241 245 249); }
+.dark .prose blockquote { color: rgb(203 213 225); border-left-color: rgb(71 85 105); }
+
+
+/* FullCalendar dark theme improvements (avoid "translucent" feel) */
+.dark .fc{
+  background: rgb(15 23 42); /* slate-900 */
+  border-radius: 12px;
+}
+.dark .fc .fc-scrollgrid,
+.dark .fc .fc-scrollgrid td,
+.dark .fc .fc-scrollgrid th{
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+.dark .fc .fc-timegrid-slot,
+.dark .fc .fc-daygrid-day-frame{
+  background: rgb(15 23 42);
+}
+.dark .fc .fc-col-header-cell-cushion,
+.dark .fc .fc-timegrid-axis-cushion,
+.dark .fc .fc-timegrid-slot-label-cushion{
+  color: rgb(226 232 240); /* slate-200 */
+}
+.fc .fc-button{
+  border-radius: 10px !important;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active{
+  background: var(--pc-primary) !important;
+  border-color: var(--pc-primary) !important;
+}
+.fc .fc-view-harness,
+.fc .fc-scrollgrid{
+  background: #FFFFFF;
+}
+.dark .fc .fc-view-harness,
+.dark .fc .fc-scrollgrid{
+  background: rgb(15 23 42);
+}
+.dark .fc .fc-button{
+  background: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+  color: rgb(226 232 240) !important;
+}
+.dark .fc .fc-button:hover{
+  background: rgb(51 65 85) !important; /* slate-700 */
+}
+.dark .fc .fc-button-primary:not(:disabled).fc-button-active{
+  background: var(--pc-primary) !important;
+  border-color: var(--pc-primary) !important;
+}
+
+
+
+/* PsyCloud inputs (used in finance autosave UI) */
+.pc-input{ @apply w-full border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100; }
+.pc-input-sm{ @apply border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100; }
+
+
+/* UI sizing (Settings: compact/normal/large) */
+html.pc-ui-compact { font-size: 14px; }
+html.pc-ui-normal { font-size: 16px; }
+html.pc-ui-large { font-size: 18px; }
