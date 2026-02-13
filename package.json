@@ -74,28 +74,21 @@
       "buildResources": "build"
     },
     "win": {
-      "target": [
-        "nsis"
-      ]
+      "target": ["nsis"]
     },
     "mac": {
-      "target": [
-        "dmg"
-      ]
+      "target": ["dmg"]
     },
     "linux": {
-      "target": [
-        "AppImage"
-      ]
-      },
+      "target": ["AppImage"]
+    }
+  },
   "publish": [
     {
       "provider": "github"
     }
   ],
-
   "engines": {
     "node": "20.x"
   }
 }
-
