@@ -4,19 +4,18 @@ import { promises as fs } from "fs";
 
 export const runtime = "nodejs";
 
-// /api/archivos/[nombre]
-export async function GET(
-  _req: Request,
-  context: { params: { nombre: string } }
-) {
+export async function GET(_req: Request, ctx: any) {
   try {
+    const nombre = String(ctx?.params?.nombre ?? "");
+    if (!nombre) {
+      return NextResponse.json({ error: "missing file name" }, { status: 400 });
+    }
+
     const uploadsDir = process.env.UPLOADS_DIR
       ? path.resolve(process.env.UPLOADS_DIR)
       : path.join(process.cwd(), "public", "uploads");
 
-    const nombre = context.params.nombre; // <- coincide con [nombre]
     const filePath = path.join(uploadsDir, nombre);
-
     const data = await fs.readFile(filePath);
 
     const ext = path.extname(nombre).toLowerCase();
